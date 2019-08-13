@@ -9,6 +9,8 @@ exports.handler = (event, context, callback) => {
     ? event.queryStringParameters.access_token: event.headers['Authorization'];
     const inputJson=JSON.parse(event.body);
     const bbox = getExtent(inputJson);
+    console.log(JSON.stringify(bbox));
+    console.log(access_token);
     const templateUrl = `https://xyz.api.here.com/hub/spaces/${space}/bbox?access_token=${access_token}&west=${bbox[0]}&north=${bbox[3]}&east=${bbox[1]}&south=${bbox[2]}`;
     https.get(templateUrl, (res) => {
         let content = '';
